@@ -1,0 +1,6 @@
+# Project exclude paths
+/.idea/
+/autolang-core/target/
+/autolang-translator/target/
+
+*.iml
