@@ -46,7 +46,6 @@ public class TranslateInfo {
     }
 
     public void setTargetText(String targetText) {
-        System.out.println(targetText);
         this.targetText = targetText;
         wake();
     }

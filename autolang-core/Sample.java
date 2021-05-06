@@ -21,7 +21,7 @@ public class Sample {
      * An American coder wrote this comment.
      *
      * @param args command line arguments.
-     *             Second doc line.
+     *             Second document line.
      */
     public static void main(String[] args/* Command line argument. */) {
         // ある日本人がこのメモを書きました。
