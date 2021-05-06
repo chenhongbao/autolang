@@ -25,7 +25,7 @@ public class OnlineTranslator extends Translator {
 
     public OnlineTranslator() {
         que = new LinkedTransferQueue<>();
-        th = new Thread(new TranslateWorker(5));
+        th = new Thread(new TranslateWorker());
         th.setDaemon(true);
         th.start();
     }
@@ -98,42 +98,26 @@ public class OnlineTranslator extends Translator {
     }
 
     private class TranslateWorker implements Runnable {
-        private final int traffic;
 
-        private int ctrl;
-        private LocalDateTime last;
-        private LocalDateTime ts;
-
-        TranslateWorker(int traffic) {
-            this.ctrl = 0;
-            this.ts = LocalDateTime.now();
-            this.last = LocalDateTime.now();
-            this.traffic = traffic;
+        TranslateWorker() {
         }
 
         @Override
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
-                var ms = Duration.between(last, ts).toMillis();
-                if (++ctrl > traffic && ms < 1000) {
-                    try {
-                        // Sleep one second for traffic ctrl.
-                        Thread.sleep(1000);
-                        last = LocalDateTime.now();
-                        ctrl = 0;
-                    } catch (InterruptedException ignored) {
-                    }
-                }
                 TranslateInfo info = null;
                 try {
                     info = que.take();
                     var str = translate(LanguageMapper.getName(info.getTarget()), info.getText());
                     info.setTargetText(str);
                 } catch (Throwable th) {
-                    info.setTargetText(null);
                     info.setError(new Error("Fail translating text: " + info.getText() + ".", th));
+                    info.setTargetText(null);
                 } finally {
-                    ts = LocalDateTime.now();
+                    try {
+                        Thread.sleep(250);
+                    } catch (InterruptedException ignored) {
+                    }
                 }
             }
         }

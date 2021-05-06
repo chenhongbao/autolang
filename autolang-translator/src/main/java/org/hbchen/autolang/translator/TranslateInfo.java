@@ -29,6 +29,7 @@ public class TranslateInfo {
     }
 
     public void setError(Error error) {
+        System.out.println(error.getMessage());
         this.error = error;
     }
 
@@ -45,6 +46,7 @@ public class TranslateInfo {
     }
 
     public void setTargetText(String targetText) {
+        System.out.println(targetText);
         this.targetText = targetText;
         wake();
     }
