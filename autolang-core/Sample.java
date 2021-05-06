@@ -3,9 +3,7 @@
  *
  * Licensed under the  GNU Affero General Public License v3.0 and you may not use
  * this file except in compliance with the  License. You may obtain a copy of the
- * License at
- *
- *                    https://www.gnu.org/licenses/agpl-3.0.txt
+ * License at https://www.gnu.org/licenses/agpl-3.0.txt
  */
 package org.hbchen.autolang;
 

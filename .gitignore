@@ -2,5 +2,6 @@
 /.idea/
 /autolang-core/target/
 /autolang-translator/target/
+/autolang-showcase/target/
 
 *.iml
