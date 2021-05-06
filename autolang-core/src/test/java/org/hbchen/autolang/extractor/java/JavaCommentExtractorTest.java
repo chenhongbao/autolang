@@ -16,7 +16,7 @@ class JavaCommentExtractorTest {
     public void testParse() {
         var extractor = CommentExtractor.create(ProgramLanguage.Java);
         try {
-            var info = extractor.parse(readSample());
+            var info = extractor.parse(readSample("Sample.java"));
             for (var c : info.blocks()) {
                 for (var x : c.javadoc()) {
                     System.out.println("[" + x.getType() + "]");
@@ -30,8 +30,8 @@ class JavaCommentExtractorTest {
         }
     }
 
-    private String readSample() {
-        File f = new File("Sample.java");
+    private String readSample(String file) {
+        File f = new File(file);
         try (BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8))) {
             var code = "";
             var line = br.readLine();
