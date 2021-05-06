@@ -31,18 +31,14 @@ public class DefaultTranslator extends Translator {
         if (lines <= 0) {
             throw new Error("Invalid lines: " + lines + ".");
         }
-        if (lines == 1) {
-            return new String[]{concat(tokens, 0, tokens.length)};
-        } else {
-            int s1 = tokens.length / lines;
-            var r = new String[lines];
-            int i = 0;
-            for (; i < lines - 1; ++i) {
-                r[i] = concat(tokens, i * s1, (i + 1) * s1);
-            }
-            r[i] = concat(tokens, i * s1, tokens.length);
-            return r;
+        int s1 = tokens.length / lines;
+        var r = new String[lines];
+        int i = 0;
+        for (; i < lines - 1; ++i) {
+            r[i] = concat(tokens, i * s1, (i + 1) * s1);
         }
+        r[i] = concat(tokens, i * s1, tokens.length);
+        return r;
     }
 
     private String concat(String[] tokens, int startInclusive, int endExclusive) {
